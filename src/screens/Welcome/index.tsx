@@ -1,51 +1,44 @@
 import React, { FunctionComponent, Fragment } from 'react';
+import { connect } from "react-redux";
+import { AppState } from "../../store";
+import { INCRE, DECRE } from "../../store/Counter/actions";
+
+import { thunkSendMessage } from "../../thunks";
 
 import Header from '../../components/Header';
 
+import { Counter } from '../../store/Counter/types';
 import s from './styles.scss';
 
-const Welcome: FunctionComponent<{}> = () => (
+interface WelcomeProps {
+  INCRE: typeof INCRE;
+  DECRE: typeof DECRE;
+  counter: Counter;
+  thunkSendMessage: any;
+}
+
+const Welcome: FunctionComponent<WelcomeProps> = (props) => {
+  const { DECRE, INCRE, counter, thunkSendMessage} = props;
+  const { count } = counter;
+  return (
   <Fragment>
     <Header />
     <section className={s.welcome}>
-      <div className={s.wrapper}>
-        <div className={s.container}>
-          <figure className={s.logo}>
-            <img src="assets/img/welcome-page/tsx-logo.svg" alt="Logo" />
-          </figure>
-
-          <section className={s.logos}>
-            <figure className={s.eslint}>
-              <img src="assets/img/welcome-page/eslint.svg" alt="Logo" />
-            </figure>
-            <figure className={s.babel}>
-              <img src="assets/img/welcome-page/babel.svg" alt="Logo" />
-            </figure>
-            <figure className={s.typescript}>
-              <img src="assets/img/welcome-page/ts.svg" alt="Logo" />
-            </figure>
-          </section>
-
-          <h3 className={s.instructionsTitle}>To start:</h3>
-          <code>
-            <p>yarn</p>
-            <p>yarn dev</p>
-          </code>
-
-          <h3 className={s.instructionsTitle}>To build:</h3>
-          <code>
-            <p>yarn build</p>
-          </code>
-
-          <h3 className={s.instructionsTitle}>To lint:</h3>
-          <code>
-            <p>yarn lint</p>
-            <p>yarn lint-fix</p>
-          </code>
-        </div>
-      </div>
+      <span>
+        {count && count.toString()}
+      </span>
     </section>
   </Fragment>
-);
+  )
+};
 
-export default Welcome;
+
+
+const mapStateToProps = (state: AppState) => ({
+  counter: state,
+});
+
+export default connect(
+  mapStateToProps,
+  { INCRE, DECRE, thunkSendMessage }
+)(Welcome);

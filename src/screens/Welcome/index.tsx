@@ -18,8 +18,8 @@ interface WelcomeProps {
 }
 
 const Welcome: FunctionComponent<WelcomeProps> = (props) => {
-  // const { DECRE, INCRE, counter, thunkSendMessage} = props;
-  const { count } = props.counter;
+  const { DECRE, INCRE, counter, thunkSendMessage} = props;
+  const { count } = counter;
   console.log(count)
   return (
   <Fragment>
@@ -28,6 +28,9 @@ const Welcome: FunctionComponent<WelcomeProps> = (props) => {
       <span>
         {count}
       </span>
+      <span onClick={() => {DECRE({count: 2})}}>+</span>
+      <span onClick={() => {INCRE({count: 2})}}>-</span>
+      <span onClick={() => {thunkSendMessage({count: 2})}}>async</span>
     </section>
   </Fragment>
   )

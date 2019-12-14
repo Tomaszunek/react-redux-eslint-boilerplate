@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import { connect } from "react-redux";
-import { AppState } from "../../store";
+import { IRootState } from "../../store";
 import { INCRE, DECRE } from "../../store/Counter/actions";
 
 import { thunkSendMessage } from "../../thunks";
@@ -18,14 +18,15 @@ interface WelcomeProps {
 }
 
 const Welcome: FunctionComponent<WelcomeProps> = (props) => {
-  const { DECRE, INCRE, counter, thunkSendMessage} = props;
-  const { count } = counter;
+  // const { DECRE, INCRE, counter, thunkSendMessage} = props;
+  const { count } = props.counter;
+  console.log(count)
   return (
   <Fragment>
     <Header />
     <section className={s.welcome}>
       <span>
-        {count && count.toString()}
+        {count}
       </span>
     </section>
   </Fragment>
@@ -34,8 +35,8 @@ const Welcome: FunctionComponent<WelcomeProps> = (props) => {
 
 
 
-const mapStateToProps = (state: AppState) => ({
-  counter: state,
+const mapStateToProps = (state: IRootState) => ({
+  counter: state.counter,
 });
 
 export default connect(

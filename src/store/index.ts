@@ -1,23 +1,33 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, Store } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { counterReducer } from "./Counter/reducers";
+import { Counter } from "./Counter/types";
+import logger from "redux-logger";
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+    counter: counterReducer as any,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export function configureStore(initialState?: IRootState): Store<IRootState> {
+    const middlewares = [thunkMiddleware, logger];
+    const middleWareEnhancer = applyMiddleware(...middlewares);
 
-export default function configureStore() {
-  const middlewares = [thunkMiddleware];
-  const middleWareEnhancer = applyMiddleware(...middlewares);
+    const store = createStore(
+        rootReducer as any,
+        initialState as any,
+        composeWithDevTools(middleWareEnhancer) as any
+    );
 
-  const store = createStore(
-    rootReducer,
-    composeWithDevTools(middleWareEnhancer)
-  );
+    return store;
+}
 
-  return store;
+
+export type CounterState = Counter;
+
+
+export interface IRootState {
+    counter: CounterState;
+    router?: any;
 }

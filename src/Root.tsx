@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 
+import { Provider } from 'react-redux';
 import App from './App';
 import Welcome from './screens/Welcome';
-import { Provider } from "react-redux";
-import { configureStore } from "./store";
+import { configureStore } from './store';
 
 const store = configureStore();
 

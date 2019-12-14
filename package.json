@@ -8,8 +8,12 @@
     "start": "cross-env serve -s ./dist/public",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.webpack --progress",
     "lint": "eslint src/**/*.{ts,tsx}",
+<<<<<<< HEAD
     "lint:fix": "eslint **/*/*.tsx  --fix",
     "test": "jest"
+=======
+    "lint:fix": "eslint **/*/*.tsx  --fix"
+>>>>>>> 60aab2944b397c448ee1076a4f34553f514c7681
   },
   "keywords": [
     "react",
@@ -21,6 +25,9 @@
   "author": "Vladyslav Tereshyn",
   "license": "ISC",
   "dependencies": {
+    "@types/react-data-grid": "^4.0.5",
+    "@types/redux-devtools-extension": "^2.13.2",
+    "@types/redux-thunk": "^2.1.0",
     "core-js": "^3.0.1",
     "dotenv": "^7.0.0",
     "react": "^16.8.6",
@@ -28,6 +35,7 @@
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.4",
     "react-redux": "^7.1.3",
+<<<<<<< HEAD
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
@@ -71,6 +79,11 @@
         "tsConfig": "C:\\Users\\Tomasz\\Desktop\\edk\\react-typescript-eslint-starter\\tsconfig.json"
       }
     }
+=======
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+>>>>>>> 60aab2944b397c448ee1076a4f34553f514c7681
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
